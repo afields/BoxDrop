@@ -1,33 +1,18 @@
 package net.aaronfields.boxdrop;
 
-import net.aaronfields.boxdrop.box.Box;
-import net.aaronfields.boxdrop.game.Game;
+import net.aaronfields.boxdrop.assets.Assets;
+import net.aaronfields.boxdrop.screens.MainMenuScreen;
+import net.aaronfields.boxdrop.settings.Settings;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.Timer.Task;
 
-public class BoxDrop extends ApplicationAdapter
+public class BoxDrop extends Game
 {
-	SpriteBatch batch;
+	public SpriteBatch batch;
 	
-	private boolean _initialized = false;
-	
-	@Override
-	public void create()
-	{
-		batch = new SpriteBatch();
-	}
-	
-	public void init()
-	{
-		_initialized = true;
-		
-		Game.reset();
-		
+	/*
+	 
 		Timer.schedule
 		(
 			new Task()
@@ -44,20 +29,28 @@ public class BoxDrop extends ApplicationAdapter
 			Game.TIME_BETWEEN_BOXES
 		);
 		
-	}
-
-	@Override
-	public void render()
-	{
-		if (!_initialized)
-			init();
 		
-		//Game.refresh();
 		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		//Game.draw();
 		batch.end();
+	  
+	 */
+	
+	@Override
+	public void create()
+	{
+		batch = new SpriteBatch();
+		Settings.load();
+		Assets.load();
+		setScreen(new MainMenuScreen(this));
+	}
+
+	@Override
+	public void render()
+	{
+		super.render();
 	}
 }
